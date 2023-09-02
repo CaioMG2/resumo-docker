@@ -124,3 +124,29 @@ Nomeando a imagem na criação:
 
 - Utiliza-se a flag -t. É possível inserir o nome e a tag, na sintaxe nome:tag. Docker build -t <nome>:<tag>.
 
+- Comando start interativo:
+A flag `-it` pode ser utilizada com o comando start também, ou seja, não precisamos criar um novo container para utilizá-lo no terminal. O comando é `docker start -it <container>`.
+
+Rodar um container no modo interativo, indicado pela opção `-it`, permite interagir diretamente com o terminal dentro do container enquanto ele está em execução. Isso significa que você pode fornecer comandos e receber saídas do container em tempo real.
+
+Quando você executa um container no modo interativo, ele não é simplesmente executado em segundo plano como um serviço. Em vez disso, o terminal do seu host se conecta ao terminal do container, permitindo que você:
+
+- Veja a saída do container em tempo real, incluindo mensagens de log e outras informações que normalmente seriam impressas no terminal do container.
+- Forneça comandos diretamente para o container. Isso pode ser útil para depuração, testes interativos ou execução de scripts específicos no ambiente do container.
+- Visualize e responda a prompts interativos que o container possa apresentar.
+
+Por exemplo, ao rodar um container no modo interativo, você pode iniciar um shell dentro do container e trabalhar no sistema de arquivos do container como se estivesse em um ambiente Linux separado. Isso é útil para fins de desenvolvimento, depuração ou exploração do ambiente do aplicativo dentro do container.
+
+Removendo imagens:
+Para remover uma imagem, utilize o comando `docker rmi <imagem>`. Você pode utilizar a flag `-f` para forçar a remoção caso a imagem esteja sendo utilizada.
+
+Removendo imagens e containers:
+O comando `docker system prune` permite remover imagens, containers e networks não utilizados. O sistema irá exigir uma confirmação para realizar essa ação.
+
+Autenticação e Logout:
+Para autenticar-se pelo terminal, utilize o comando `docker login`. Para sair, utilize `docker logout`.
+
+Enviando imagens para o Docker Hub:
+Para enviar imagens para o Docker Hub, utilize o comando `docker push <imagem>`. Antes disso, é necessário criar um repositório, semelhante ao GitHub. Para baixar uma imagem, utilize `docker pull <imagem>`, e depois você pode criar um novo container com `docker run <imagem>`.
+
+
