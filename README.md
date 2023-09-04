@@ -150,3 +150,60 @@ Enviando imagens para o Docker Hub:
 Para enviar imagens para o Docker Hub, utilize o comando `docker push <imagem>`. Antes disso, é necessário criar um repositório, semelhante ao GitHub. Para baixar uma imagem, utilize `docker pull <imagem>`, e depois você pode criar um novo container com `docker run <imagem>`.
 
 
+Docker Volume:
+
+Uma forma prática de persistir dados em aplicações e não depender de containers. Todo dado criado por um container é isolado por ele, mas quando o container é removido, perdemos os dados. Portanto, precisamos dos volumes para gerenciar os dados e também conseguir fazer backups de forma simples.
+
+Tipos de Volumes:
+
+1. Anônimos: Diretórios criados pela flag `-v`, com nome aleatório.
+2. Nomeados: Com nomes específicos.
+3. Bind Mounts: Uma forma de salvar dados na máquina sem o gerenciamento do Docker. Informamos um diretório para esse fim.
+
+Comandos Úteis:
+
+- `docker volume ls`: Lista todos os volumes do ambiente.
+- `docker run -v nome-do-volume:/caminho/no/contêiner nome-da-imagem`: Cria um container com um volume nomeado.
+- `docker volume prune`: Remove todos os volumes não utilizados.
+- `docker volume rm <nome-do-volume>`: Remove um volume específico.
+- `docker volume inspect <nome-do-volume>`: Exibe informações detalhadas sobre um volume específico.
+- `docker volume create <nome>`: Cria um volume manualmente.
+- `docker run -v volume:/data:ro`: Cria um volume somente leitura.
+
+Exemplos de Uso:
+
+- Volume Anônimo: `docker run -v /data`.
+- Volume Nomeado: `docker run -v nomedovolume:/data`.
+- Bind Mount: `docker run /dir/data:/data`.
+
+Redes no Docker:
+
+As redes no Docker são uma forma de gerenciar a conexão do Docker com outras plataformas ou até mesmo entre containers. Elas são criadas separadas do container, assim como os volumes. Além disso, existem alguns drivers de rede que podem ser utilizados para diferentes fins.
+
+Principais Tipos de Comunicação em Containers:
+
+1. Externa: Com uma API de servidor remoto.
+2. Com o Host: Com a máquina que está executando o Docker.
+3. Entre Containers: Utiliza o driver bridge e permite a comunicação entre dois ou mais containers.
+
+Principais Drivers de Rede:
+
+- Bridge: Conecta containers.
+- Host: Conexão entre um container e a máquina que está hospedando o Docker.
+- Macvlan: Permite a conexão a um container por um endereço MAC.
+- None: Remove todas as conexões de rede de um container.
+- Plugins: Permitem extensões de terceiros para criar outras redes.
+
+Comandos Úteis para Redes no Docker:
+
+- `docker network create <nome>`: Cria uma nova rede.
+- `docker network ls`: Lista todas as redes disponíveis no sistema.
+- `docker network inspect <nome>`: Exibe informações detalhadas sobre uma rede específica.
+- `docker network rm <nome>`: Remove uma rede específica.
+- `docker network connect <rede> <container>`: Conecta um container a uma rede existente.
+- `docker network disconnect <rede> <container>`: Desconecta um container de uma rede.
+- `docker run --network <nome-da-rede> <nome-da-imagem>`: Cria um container em uma rede específica.
+
+Conexão com o Host do Docker:
+
+É possível conectar um container com o host do Docker, que é a máquina que está executando o Docker. O IP de host pode ser referenciado como `host.docker.internal`.
