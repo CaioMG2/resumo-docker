@@ -1,4 +1,4 @@
-Resumo sobre os estudos de Docker.
+Resumo sobre os estudos de Docker, Docker Swarm e Kubernetes.
 
 1. **Introdução ao Docker:**
    - O Docker é um software que simplifica a configuração de aplicações, permitindo criar e gerenciar containers que funcionam como ambientes isolados para executar aplicações.
@@ -207,3 +207,84 @@ Comandos Úteis para Redes no Docker:
 Conexão com o Host do Docker:
 
 É possível conectar um container com o host do Docker, que é a máquina que está executando o Docker. O IP de host pode ser referenciado como `host.docker.internal`.
+
+Docker Compose e Construção de Imagem:
+
+Podemos gerar o build da imagem durante o Compose, o que elimina a necessidade de gerar o build da imagem a cada atualização.
+
+**Verificando Serviços no Compose:**
+- `docker-compose ps`
+
+Docker Swarm para Orquestração:
+
+O Docker Swarm é um serviço que rege sobre outros serviços para verificar se os mesmos funcionam como deveriam. Exemplos incluem o Docker Swarm, Kubernetes e Apache Mesos.
+
+**Conceitos Importantes:**
+- **Nodes:** São instâncias (máquinas) que participam do Swarm.
+- **Manager Node:** Node que gerencia os demais nodes.
+- **Worker Node:** Nodes que executam tarefas em função do Manager.
+- **Service:** Um conjunto de tasks que o Manager Node envia para o Worker Node executar.
+- **Task:** Comandos que são executados nos nodes.
+
+**Adicionando Novos Nodes:**
+- `docker swarm join --token <token> <ip>:<porta>`
+
+**Criando um Serviço no Swarm:**
+- `docker service create --name <nome> <imagem>`
+
+**Criando um Serviço com um Número Específico de Réplicas:**
+- `docker service create --name <nome> --replicas <numero> <imagem>`
+
+**Checando o Token do Swarm:**
+- `docker swarm join-token manager`
+
+Kubernetes:
+
+Kubernetes é outra ferramenta de orquestração de containers que permite a criação de múltiplos containers em diferentes máquinas (nodes), escalando projetos formando um cluster.
+
+**Conceitos Fundamentais:**
+- **Control Plane:** Onde é gerenciado o controle dos processos dos nodes.
+- **Nodes:** Máquinas gerenciadas pelo Control Plane.
+- **Deployment:** Execução de uma imagem/projeto em um Pod.
+- **Pod:** Um ou mais containers que estão em um node.
+- **Services:** Serviços que expõem os Pods ao mundo externo.
+- **kubectl:** Cliente de linha de comando para Kubernetes.
+
+Minikube:
+- **Inicializar o Minikube:** `minikube start --driver=<DRIVER>` (Driver depende das dependências).
+- **Verificar status do Minikube:** `minikube status`.
+- **Parar o Minikube:** `minikube stop`.
+- **Acessar a Dashboard do Minikube:** `minikube dashboard` ou obter a URL: `minikube dashboard --url`.
+
+Deployment:
+- **Criando um Deployment no Kubernetes:** `kubectl create deployment <nome> --image=<imagem>`.
+
+**Verificação de Deployments:**
+- `kubectl get deployments`.
+- `kubectl describe deployments`.
+
+**Verificação de Pods:**
+- `kubectl get pods`.
+- `kubectl describe pods`.
+
+**Verificação da Configuração do Kubernetes:**
+- `kubectl config view`.
+
+Services:
+- **Criando um Service no Kubernetes:** `kubectl expose deployment <nome> --type=<tipo> --port=<porta>`.
+
+**Verificando Serviços:**
+- `kubectl get services`.
+- `kubectl describe services/<nome>`.
+
+**Escalando a Aplicação:**
+- `kubectl scale deployment/<nome> --replicas=<numero>`.
+
+**Diminuir a Escala (Scale Down):**
+- `kubectl scale deployment/<nome> --replicas=<numero>`.
+
+**Atualização de Imagem:**
+- `kubectl set image deployment/<nome> <nome-container>=<nova-imagem>`.
+
+**Desfazendo Alterações:**
+- `kubectl rollout undo deployment/<nome>`.
