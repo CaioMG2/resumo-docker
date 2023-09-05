@@ -281,7 +281,7 @@ Services:
 - `kubectl scale deployment/<nome> --replicas=<numero>`.
 
 **Diminuir a Escala (Scale Down):**
-- `kubectl scale deployment/<nome> --replicas=<numero>`.
+- `kubectl scale deployment/<nome> --replicas=<numero_menor>`.
 
 **Atualização de Imagem:**
 - `kubectl set image deployment/<nome> <nome-container>=<nova-imagem>`.
