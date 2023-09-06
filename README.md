@@ -288,3 +288,51 @@ Services:
 
 **Desfazendo Alterações:**
 - `kubectl rollout undo deployment/<nome>`.
+-
+**Deletar um serviço:**
+
+    Utilize o comando kubectl delete service <NOME>.
+
+**Deletar um deployment:**
+
+    Use o comando kubectl delete deployment <NOME>.
+
+**Modo Declarativo:**
+
+    O modo declarativo baseia-se em arquivos YAML, semelhantes ao Docker Compose, simplificando as configurações e consolidando o gerenciamento em um único comando.
+
+**Chaves Comuns no Arquivo YAML:**
+
+    apiVersion: Especifica a versão da ferramenta utilizada.
+    kind: Define o tipo de objeto (deployment, service, etc.).
+    metadata: Descreve o objeto, incluindo o nome.
+    replicas: Determina o número de réplicas de Nodes/Pods.
+    containers: Define as especificações dos contêineres, incluindo nome e imagem.
+
+**xecutando o Arquivo de Deployment:**
+
+    Crie a implantação com base no arquivo .yaml usando o comando kubectl apply -f <arquivo>.
+
+**Parando uma Deployment:**
+
+    Encerre o deployment com o comando kubectl delete -f <arquivo>.
+
+**Criando um Serviço:**
+
+    Para criar um serviço de forma declarativa, crie um arquivo para definir o Service (kind), semelhante  ao deployment.
+
+**Executando o Serviço:**
+
+    Utilize o comando kubectl apply -f <arquivo> para iniciar o serviço, tornando-o disponível. Lembre-se de gerar o IP de acesso com minikube service <nome>.
+
+**Parando o Serviço:**
+
+    Encerre o serviço com o comando kubectl delete -f <arquivo>.
+
+**Atualizando o Projeto no Modo Declarativo:**
+
+    Crie uma nova versão da imagem e faça o push para o hub. Em seguida, atualize a tag no arquivo de implantação e reaplique o comando de apply.
+
+**Unindo os Arquivos:**
+
+    Combine os arquivos de implantação e serviço, separando-os com --. É uma prática recomendada colocar o serviço antes da implantação.
